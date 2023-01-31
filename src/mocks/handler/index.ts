@@ -1,4 +1,5 @@
 import { rest } from "msw";
+import getUser from "./getUser";
 
 export const handlers = [
     rest.get("/user", (_, res, ctx) => {
@@ -12,12 +13,7 @@ export const handlers = [
                 }),
             );
         }
-        return res(
-            ctx.status(200),
-            ctx.json({
-                userName: "admin",
-            }),
-        );
+        return res(ctx.status(200), ctx.json(getUser));
     }),
     rest.post("/login", (_, res, ctx) => {
         sessionStorage.setItem("is-authenticated", "true");
